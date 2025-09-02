@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { logger } from "./logging";
+import { withAccelerate } from "@prisma/extension-accelerate";
 
 export const prismaClient = new PrismaClient({
   log: [
@@ -20,7 +21,7 @@ export const prismaClient = new PrismaClient({
       level: "warn",
     },
   ],
-});
+}).$extends(withAccelerate());
 
 prismaClient.$on("query", (e: any) => {
   logger.info(e);
