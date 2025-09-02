@@ -9,7 +9,11 @@ const app = new Hono();
 app.use(
   "/api/*",
   cors({
-    origin: ["http://localhost:3000", "http://localhost:3001"],
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:3001",
+      "http://localhost:5173",
+    ],
     allowMethods: ["*"], // allow all methods
   })
 );
