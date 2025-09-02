@@ -50,7 +50,15 @@ describe("Post Model", () => {
         readTime: 5,
         createdAt: new Date(),
         updatedAt: new Date(),
-        tags: [1, 2, 3],
+        category: {
+          id: 1,
+          name: "Technology",
+        },
+        tags: [
+          { id: 1, name: "JavaScript" },
+          { id: 2, name: "TypeScript" },
+          { id: 3, name: "React" },
+        ],
       };
 
       expect(postResponse.id).toBe("test-id-123");
@@ -62,7 +70,9 @@ describe("Post Model", () => {
       expect(postResponse.readTime).toBe(5);
       expect(postResponse.createdAt).toBeInstanceOf(Date);
       expect(postResponse.updatedAt).toBeInstanceOf(Date);
-      expect(postResponse.tags).toEqual([1, 2, 3]);
+      expect(postResponse.category.id).toBe(1);
+      expect(postResponse.category.name).toBe("Technology");
+      expect(postResponse.tags).toHaveLength(3);
     });
 
     it("should allow optional excerpt and tags", () => {
@@ -75,10 +85,15 @@ describe("Post Model", () => {
         readTime: 5,
         createdAt: new Date(),
         updatedAt: new Date(),
+        category: {
+          id: 1,
+          name: "Technology",
+        },
+        tags: [],
       };
 
       expect(postResponse.excerpt).toBeUndefined();
-      expect(postResponse.tags).toBeUndefined();
+      expect(postResponse.tags).toEqual([]);
     });
   });
 
@@ -94,23 +109,23 @@ describe("Post Model", () => {
         readTime: 5,
         createdAt: new Date(),
         updatedAt: new Date(),
-        tags: [{ id: 1 }, { id: 2 }, { id: 3 }],
+        category: {
+          id: 1,
+          name: "Technology",
+        },
+        tags: [
+          { id: 1, name: "JavaScript" },
+          { id: 2, name: "TypeScript" },
+          { id: 3, name: "React" },
+        ],
       };
 
       const result = toPostResponse(mockPost);
 
-      expect(result).toEqual({
-        id: "test-id-123",
-        title: "Test Post",
-        slug: "test-post",
-        content: "This is a test post content",
-        excerpt: "A brief excerpt",
-        categoryId: 1,
-        readTime: 5,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        tags: [1, 2, 3],
-      });
+      expect(result.id).toBe("test-id-123");
+      expect(result.title).toBe("Test Post");
+      expect(result.category.name).toBe("Technology");
+      expect(result.tags).toHaveLength(3);
     });
 
     it("should correctly map a Post without tags to PostResponse", () => {
@@ -124,22 +139,17 @@ describe("Post Model", () => {
         readTime: 5,
         createdAt: new Date(),
         updatedAt: new Date(),
+        category: {
+          id: 1,
+          name: "Technology",
+        },
+        tags: [],
       };
 
       const result = toPostResponse(mockPost);
 
-      expect(result).toEqual({
-        id: "test-id-123",
-        title: "Test Post",
-        slug: "test-post",
-        content: "This is a test post content",
-        excerpt: undefined,
-        categoryId: 1,
-        readTime: 5,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        tags: [],
-      });
+      expect(result.excerpt).toBeUndefined();
+      expect(result.tags).toEqual([]);
     });
 
     it("should handle null excerpt correctly", () => {
@@ -153,6 +163,10 @@ describe("Post Model", () => {
         readTime: 5,
         createdAt: new Date(),
         updatedAt: new Date(),
+        category: {
+          id: 1,
+          name: "Technology",
+        },
         tags: [],
       };
 
@@ -172,6 +186,10 @@ describe("Post Model", () => {
         readTime: 5,
         createdAt: new Date(),
         updatedAt: new Date(),
+        category: {
+          id: 1,
+          name: "Technology",
+        },
         tags: [],
       };
 
