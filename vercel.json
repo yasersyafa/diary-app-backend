@@ -1,5 +1,5 @@
 {
-  "buildCommand": "bunx prisma generate && bun run build",
+  "buildCommand": "prisma generate && bun run build",
   "installCommand": "bun install",
   "framework": "hono"
 }
