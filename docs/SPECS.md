@@ -241,7 +241,8 @@ All API responses follow a consistent format:
 
 ```json
 {
-  "name": "Technology"
+  "name": "Technology",
+  "description": "Articles about technology, programming, and software development"
 }
 ```
 
@@ -252,6 +253,7 @@ All API responses follow a consistent format:
   "data": {
     "id": 1,
     "name": "Technology",
+    "description": "Articles about technology, programming, and software development",
     "createdAt": "2024-01-01T00:00:00Z",
     "updatedAt": "2024-01-01T00:00:00Z",
     "postCount": 0
@@ -271,6 +273,7 @@ All API responses follow a consistent format:
     {
       "id": 1,
       "name": "Technology",
+      "description": "Articles about technology, programming, and software development",
       "createdAt": "2024-01-01T00:00:00Z",
       "updatedAt": "2024-01-01T00:00:00Z",
       "postCount": 5
@@ -278,6 +281,7 @@ All API responses follow a consistent format:
     {
       "id": 2,
       "name": "Lifestyle",
+      "description": "Personal development, health, and lifestyle articles",
       "createdAt": "2024-01-01T00:00:00Z",
       "updatedAt": "2024-01-01T00:00:00Z",
       "postCount": 3
@@ -299,6 +303,7 @@ All API responses follow a consistent format:
   "data": {
     "id": 1,
     "name": "Technology",
+    "description": "Articles about technology, programming, and software development",
     "createdAt": "2024-01-01T00:00:00Z",
     "updatedAt": "2024-01-01T00:00:00Z",
     "postCount": 5
@@ -316,7 +321,8 @@ All API responses follow a consistent format:
 
 ```json
 {
-  "name": "Updated Technology"
+  "name": "Updated Technology",
+  "description": "Updated description for technology category"
 }
 ```
 
@@ -327,6 +333,7 @@ All API responses follow a consistent format:
   "data": {
     "id": 1,
     "name": "Updated Technology",
+    "description": "Updated description for technology category",
     "createdAt": "2024-01-01T00:00:00Z",
     "updatedAt": "2024-01-01T00:00:00Z"
   }
@@ -516,6 +523,7 @@ All API responses follow a consistent format:
 ### **Categories:**
 
 - **Name**: Required, 1-100 characters, unique
+- **Description**: Required, 1-500 characters
 
 ### **Tags:**
 
@@ -562,7 +570,8 @@ curl "https://your-domain.vercel.app/api/posts?search=typescript&year=2024&page=
 curl -X PUT https://your-domain.vercel.app/api/categories/1 \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Web Development"
+    "name": "Web Development",
+    "description": "Articles about web development, frontend, and backend technologies"
   }'
 ```
 

@@ -29,6 +29,7 @@ export class CategoryService {
     const newCategory = await prismaClient.category.create({
       data: {
         name: request.name,
+        description: request.description,
       },
     });
 
@@ -112,7 +113,8 @@ export class CategoryService {
     const updatedCategory = await prismaClient.category.update({
       where: { id },
       data: {
-        ...(request.name && { name: request.name }),
+        name: request.name,
+        description: request.description,
       },
     });
 
