@@ -12,7 +12,7 @@ import { PostValidation } from "../validations/post.validation";
 export const postController = new Hono();
 
 // Create a new post
-postController.post("/api/posts", async (c) => {
+postController.post("/posts", async (c) => {
   try {
     const request = (await c.req.json()) as CreatePostRequest;
     const response = await PostService.createPost(request);
@@ -27,7 +27,7 @@ postController.post("/api/posts", async (c) => {
 });
 
 // Get all posts with pagination and filtering
-postController.get("/api/posts", async (c) => {
+postController.get("/posts", async (c) => {
   try {
     // Parse query parameters
     const pagination = PostValidation.PAGINATION.parse({
@@ -55,7 +55,7 @@ postController.get("/api/posts", async (c) => {
 });
 
 // Get post by ID
-postController.get("/api/posts/:id", async (c) => {
+postController.get("/posts/:id", async (c) => {
   try {
     const { id } = PostValidation.ID.parse({ id: c.req.param("id") }) as {
       id: string;
@@ -72,7 +72,7 @@ postController.get("/api/posts/:id", async (c) => {
 });
 
 // Update post
-postController.put("/api/posts/:id", async (c) => {
+postController.put("/posts/:id", async (c) => {
   try {
     const { id } = PostValidation.ID.parse({ id: c.req.param("id") }) as {
       id: string;
@@ -90,7 +90,7 @@ postController.put("/api/posts/:id", async (c) => {
 });
 
 // Delete post
-postController.delete("/api/posts/:id", async (c) => {
+postController.delete("/posts/:id", async (c) => {
   try {
     const { id } = PostValidation.ID.parse({ id: c.req.param("id") }) as {
       id: string;

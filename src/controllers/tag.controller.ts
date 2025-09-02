@@ -7,7 +7,7 @@ import { TagValidation } from "../validations/tag.validation";
 export const tagController = new Hono();
 
 // Create a new tag
-tagController.post("/api/tags", async (c) => {
+tagController.post("/tags", async (c) => {
   try {
     const request = (await c.req.json()) as CreateTagRequest;
     const response = await TagService.createTag(request);
@@ -22,7 +22,7 @@ tagController.post("/api/tags", async (c) => {
 });
 
 // Get all tags
-tagController.get("/api/tags", async (c) => {
+tagController.get("/tags", async (c) => {
   try {
     const response = await TagService.getAllTags();
     return c.json({ data: response });
@@ -36,7 +36,7 @@ tagController.get("/api/tags", async (c) => {
 });
 
 // Get tag by ID
-tagController.get("/api/tags/:id", async (c) => {
+tagController.get("/tags/:id", async (c) => {
   try {
     const { id } = TagValidation.ID.parse({ id: c.req.param("id") });
     const response = await TagService.getTagById(id);
@@ -51,7 +51,7 @@ tagController.get("/api/tags/:id", async (c) => {
 });
 
 // Update tag
-tagController.put("/api/tags/:id", async (c) => {
+tagController.put("/tags/:id", async (c) => {
   try {
     const { id } = TagValidation.ID.parse({ id: c.req.param("id") });
     const request = (await c.req.json()) as UpdateTagRequest;
@@ -67,7 +67,7 @@ tagController.put("/api/tags/:id", async (c) => {
 });
 
 // Delete tag
-tagController.delete("/api/tags/:id", async (c) => {
+tagController.delete("/tags/:id", async (c) => {
   try {
     const { id } = TagValidation.ID.parse({ id: c.req.param("id") });
     await TagService.deleteTag(id);

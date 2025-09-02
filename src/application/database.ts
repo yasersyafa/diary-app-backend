@@ -1,3 +1,4 @@
+import { withAccelerate } from "@prisma/extension-accelerate";
 import { PrismaClient } from "../generated/prisma";
 
 // Create base Prisma client
@@ -20,6 +21,6 @@ export const prismaClient = new PrismaClient({
       level: "warn",
     },
   ],
-});
+}).$extends(withAccelerate());
 
 // Export extended client with Accelerate

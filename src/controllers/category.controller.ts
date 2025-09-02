@@ -10,7 +10,7 @@ import { CategoryValidation } from "../validations/category.validation";
 export const categoryController = new Hono();
 
 // Create a new category
-categoryController.post("/api/categories", async (c) => {
+categoryController.post("/categories", async (c) => {
   try {
     const request = (await c.req.json()) as CreateCategoryRequest;
     const response = await CategoryService.createCategory(request);
@@ -25,7 +25,7 @@ categoryController.post("/api/categories", async (c) => {
 });
 
 // Get all categories
-categoryController.get("/api/categories", async (c) => {
+categoryController.get("/categories", async (c) => {
   try {
     const response = await CategoryService.getAllCategories();
     return c.json({ data: response });
@@ -39,7 +39,7 @@ categoryController.get("/api/categories", async (c) => {
 });
 
 // Get category by ID
-categoryController.get("/api/categories/:id", async (c) => {
+categoryController.get("/categories/:id", async (c) => {
   try {
     const { id } = CategoryValidation.ID.parse({ id: c.req.param("id") });
     const response = await CategoryService.getCategoryById(id);
@@ -54,7 +54,7 @@ categoryController.get("/api/categories/:id", async (c) => {
 });
 
 // Update category
-categoryController.put("/api/categories/:id", async (c) => {
+categoryController.put("/categories/:id", async (c) => {
   try {
     const { id } = CategoryValidation.ID.parse({ id: c.req.param("id") });
     const request = (await c.req.json()) as UpdateCategoryRequest;
@@ -70,7 +70,7 @@ categoryController.put("/api/categories/:id", async (c) => {
 });
 
 // Delete category
-categoryController.delete("/api/categories/:id", async (c) => {
+categoryController.delete("/categories/:id", async (c) => {
   try {
     const { id } = CategoryValidation.ID.parse({ id: c.req.param("id") });
     await CategoryService.deleteCategory(id);
