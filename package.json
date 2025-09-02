@@ -1,7 +1,12 @@
 {
   "name": "diary-app",
   "scripts": {
-    "dev": "bun run --hot src/index.ts"
+    "dev": "bun run --hot src/index.ts",
+    "build": "bun run prisma:generate && bun run build:app",
+    "build:app": "bun build src/index.ts --outdir dist --target node",
+    "prisma:generate": "prisma generate",
+    "prisma:db:push": "prisma db push",
+    "start": "bun run dist/index.js"
   },
   "dependencies": {
     "@prisma/client": "^6.15.0",

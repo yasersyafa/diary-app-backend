@@ -1,8 +1,9 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../generated/prisma";
 import { logger } from "./logging";
 import { withAccelerate } from "@prisma/extension-accelerate";
 
-export const prismaClient = new PrismaClient({
+// Create base Prisma client
+const basePrismaClient = new PrismaClient({
   log: [
     {
       emit: "event",
@@ -21,20 +22,24 @@ export const prismaClient = new PrismaClient({
       level: "warn",
     },
   ],
-}).$extends(withAccelerate());
+});
 
-prismaClient.$on("query", (e: any) => {
+// Add event listeners to base client
+basePrismaClient.$on("query", (e: any) => {
   logger.info(e);
 });
 
-prismaClient.$on("error", (e: any) => {
+basePrismaClient.$on("error", (e: any) => {
   logger.error(e);
 });
 
-prismaClient.$on("info", (e: any) => {
+basePrismaClient.$on("info", (e: any) => {
   logger.info(e);
 });
 
-prismaClient.$on("warn", (e: any) => {
+basePrismaClient.$on("warn", (e: any) => {
   logger.warn(e);
 });
+
+// Export extended client with Accelerate
+export const prismaClient = basePrismaClient.$extends(withAccelerate());
