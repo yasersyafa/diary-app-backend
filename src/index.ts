@@ -1,8 +1,7 @@
 import { Hono } from "hono";
+import { postController } from "./controllers/post.controller";
 
 const app = new Hono();
-// creating base path for api is /api
-app.basePath("/api");
 
 app.get("/", (c) => {
   return c.redirect("/api", 302);
@@ -11,5 +10,8 @@ app.get("/", (c) => {
 app.get("/api", (c) => {
   return c.text("Hello, Yaser!");
 });
+
+// registering controllers
+app.route("/api", postController);
 
 export default app;
