@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { postController } from "./controllers/post.controller";
 import { categoryController } from "./controllers/category.controller";
+import { tagController } from "./controllers/tag.controller";
 
 const app = new Hono();
 
@@ -15,5 +16,6 @@ app.get("/api", (c) => {
 // registering controllers
 app.route("/api", postController);
 app.route("/api", categoryController);
+app.route("/api", tagController);
 
 export default app;
