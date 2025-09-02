@@ -1,16 +1,25 @@
 import { Hono } from "hono";
+import { cors } from "hono/cors";
 import { postController } from "./controllers/post.controller";
 import { categoryController } from "./controllers/category.controller";
 import { tagController } from "./controllers/tag.controller";
 
 const app = new Hono();
 
+app.use(
+  "/api/*",
+  cors({
+    origin: ["http://localhost:3000", "http://localhost:3001"],
+    allowMethods: ["*"], // allow all methods
+  })
+);
+
 app.get("/", (c) => {
   return c.redirect("/api", 302);
 });
 
 app.get("/api", (c) => {
-  return c.text("Hello, Yaser!");
+  return c.text("Hello, Yaser Syafa!");
 });
 
 // registering controllers
