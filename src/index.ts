@@ -14,7 +14,7 @@ app.use(
       "http://localhost:3001",
       "http://localhost:5173",
     ],
-    allowMethods: ["*"], // allow all methods
+    allowMethods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   })
 );
 
