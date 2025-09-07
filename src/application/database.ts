@@ -1,5 +1,5 @@
 import { withAccelerate } from "@prisma/extension-accelerate";
-import { PrismaClient } from "../generated/prisma";
+import { PrismaClient } from "../generated/prisma/index.js";
 
 // Create base Prisma client
 export const prismaClient = new PrismaClient({
